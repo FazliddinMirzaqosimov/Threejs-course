@@ -79,7 +79,7 @@ const gradientTexture = loader.load("./textures/gradients/5.jpg");
 doorColorTexture.colorSpace = THREE.SRGBColorSpace;
 matcapTexture.colorSpace = THREE.SRGBColorSpace;
 
-// //MeshBasicMaterial
+// //MeshBasicMaterial - A material for drawing geometries in a simple shaded (flat or wireframe) way.
 // const material = new THREE.MeshBasicMaterial();
 // material.map = doorColorTexture;
 // material.color = new THREE.Color("red");
@@ -91,32 +91,33 @@ matcapTexture.colorSpace = THREE.SRGBColorSpace;
 // material.alphaMap = doorALphaTexture;
 // material.side = THREE.DoubleSide;
 
-// //MeshNormalMaterial MATERIAL
+// //MeshNormalMaterial MATERIAL - A material that maps the normal vectors to RGB colors.
 // const material = new THREE.MeshNormalMaterial();
 
 //  material.flatShading = true
 
-// //MeshMatcapMaterial MATERIAL
+// //MeshMatcapMaterial MATERIAL - defined by a MatCap (or Lit Sphere) texture, which encodes the material color and shading.
 // const material = new THREE.MeshMatcapMaterial();
 // material.matcap = matcapTexture
 
 // //MeshDepthMaterial MATERIAL
 // const material = new THREE.MeshDepthMaterial();
 
-// //MeshLambertMaterial MATERIAL
+// //MeshLambertMaterial MATERIAL -A material for drawing geometry by depth. Depth is based off of the camera near and far plane. White is nearest, black is farthest.
 // const material = new THREE.MeshLambertMaterial();
 
-// //MeshPhongMaterial MATERIAL
+// //MeshPhongMaterial MATERIAL - The material uses a non-physically based Blinn-Phong model for calculating reflectance. Unlike the Lambertian model used in the MeshLambertMaterial this can simulate shiny surfaces with specular highlights (such as varnished wood). MeshPhongMaterial uses per-fragment shading.
 // const material = new THREE.MeshPhongMaterial();
 // material.shininess = 23;
 // material.specular = new THREE.Color("red");
 
-// //MeshToonMaterial MATERIAL
+// //MeshToonMaterial MATERIAL -  A material implementing toon shading.
 // gradientTexture.magFilter = THREE.NearestFilter;
 // const material = new THREE.MeshToonMaterial();
 // material.gradientMap = gradientTexture;
 
-// //MeshStandardMaterial MATERIAL
+// //MeshStandardMaterial MATERIAL - A standard physically based material, using Metallic-Roughness workflow.
+
 // const material = new THREE.MeshStandardMaterial();
 // material.metalness = 1
 // material.roughness =1
