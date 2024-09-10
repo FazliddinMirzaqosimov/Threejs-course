@@ -1,14 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Timer } from "three/addons/misc/Timer.js";
-import GUI from "lil-gui";
-import { Sky } from "three/addons/objects/Sky.js";
+ import { Sky } from "three/addons/objects/Sky.js";
 /**
  * Base
  */
 // Debug
-const gui = new GUI();
-
+ 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
@@ -423,7 +421,7 @@ sky.material.uniforms["sunPosition"].value.set(0.3, -0.038, -0.95);
 //Fog
 
 // scene.fog = new THREE.Fog("#0f0f0f", 10, 13);
-scene.fog = new THREE.FogExp2("#08343f", 0.1);
+scene.fog = new THREE.FogExp2("#08343f", 0.05);
 
 /**
  * Animate
