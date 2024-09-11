@@ -18,6 +18,7 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const particleTexture = textureLoader.load("/textures/particles/2.png");
 
 /**
  * Test cube
@@ -26,22 +27,47 @@ const cube = new THREE.Mesh(
   new THREE.BoxGeometry(1, 1, 1),
   new THREE.MeshBasicMaterial()
 );
-// scene.add(cube)
+// scene.add(cube);
 
 //particles
 
-const particleGeometry = new THREE.SphereGeometry(1, 33, 33);
+const particleGeometry = new THREE.BufferGeometry();
+
+const count = 50000;
+
+const positions = new Float32Array(count * 3);
+const colors = new Float32Array(count * 3);
+
+for (let index = 0; index < count * 500; index++) {
+  positions[index] = (Math.random() - 0.5) * 5;
+  colors[index] = Math.random();
+}
+
+particleGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positions, 3)
+);
+particleGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
 const particleMaterial = new THREE.PointsMaterial({
   size: 0.02,
   sizeAttenuation: true,
+  // color: "blue",
 });
 
+particleMaterial.transparent = true;
+particleMaterial.alphaMap = particleTexture;
+// particleMaterial.alphaTest = 0.001;
+// particleMaterial.depthTest = false;
+particleMaterial.depthWrite = false;
+// particleMaterial.blending = THREE.AdditiveBlending;
+particleMaterial.vertexColors = true;
 
 //Points
 
-const particles = new THREE.Points(particleGeometry,particleMaterial)
+const particles = new THREE.Points(particleGeometry, particleMaterial);
 
-scene.add(particles)
+scene.add(particles);
 
 /**
  * Sizes
@@ -98,6 +124,18 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  // particles.rotation.y = elapsedTime * .1
+
+  for (let index = 0; index < count; index++) {
+    const i3 = index * 3;
+    let x = particleGeometry.attributes.position.array[i3];
+    particleGeometry.attributes.position.array[i3 + 1] = Math.sin(
+      elapsedTime +x
+    );
+   }
+
+  particleGeometry.attributes.position.needsUpdate = true;
 
   // Update controls
   controls.update();
